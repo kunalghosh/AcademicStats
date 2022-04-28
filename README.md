@@ -44,9 +44,9 @@ def name_processor(name: str):
 We need two classes which would process `PubMed` and `Arxiv` xml files respectively
 
 ```python
-class PubMed:
-	def __init__(self, path_to_pubmed_dir):
-		self.path = path_to_pubmed_dir
+class Arxiv:
+	def __init__(self, path_to_dir):
+		self.path = path_to_dir
 		self.files = glob(f'{self.path}/*.xml')
 
 	def __iter__(self):
@@ -57,7 +57,7 @@ class PubMed:
 		Processes the next xml file and yields an author object
 		"""
 		for file in self.files:
-			xml_data = self._process_xml(file)
+			xml_data = self._get_xml_root(file)
 			name = name_processor(_get_name(xml_data))
 			countries = affiliations_processor(_get_affiliation(xml_data))
 			yield Author(name, set(countries.keys()))
@@ -69,8 +69,45 @@ class PubMed:
 		pass
 ```
 
-Similar class for processing Arxiv files. 
+Similar class for processing PubMed files. 
 > TODO: Maybe abstract out the class implementations and just implement the `_get_name()` and `_get_affiliation()` in each
 
-```
+```python
 
+class PubMed:
+	def __init__(self, path_to_dir):
+		self.path = path_to_dir
+		self.files = glob(f'{self.path}/*.xml')
+
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		"""
+		Processes the next xml file and yields an author object
+		"""
+		for file in self.files:
+			xml_data = self._get_xml_root(file)
+			authors = self._get_authors(xml_data)
+			name = name_processor(_get_name(xml_data))
+			countries = affiliations_processor(_get_affiliation(xml_data))
+			yield Author(name, set(countries.keys()))
+
+	def _get_xml_root(file: str):
+		root = ET.parse.getroot(file)
+		return root
+
+	def _get_authors(xml_data: Elementree)
+		author_list = xml_data.find('AuthorList')
+		authors = author_list.findall('Author')
+		return authors
+
+	def _get_name(xml_data: Elementree):
+		forename = xml_data.find('ForeName')
+		initials = xml_data.find('Initials')
+		lastname = xml_data.find('LastName')
+		return f'{forname} {initials} {lastname}'
+
+	def _get_affiliation(xml_data: Elementree):
+		pass
+```
