@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -97,6 +98,11 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
 
 # SageMath parsed files
 *.sage.py
@@ -127,3 +133,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IDE settings
+.vscode/
+.idea/
