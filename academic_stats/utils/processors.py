@@ -28,4 +28,16 @@ def name_processor(name: str):
             Processed name which is a string with the following structure.
             "<Firstchar of forname><Firstchar of Initial1><Firstchar of Initial2><...> <Lastname without accents>"
     """
-    return name
+    name = strip_accents(name)
+    name_split = name.strip().split(" ")
+    lastname = name_split[-1]
+    first_and_initials = []
+    for words in name_split[:-1]:
+        first_and_initials.append(words[0].upper())
+    return f"{''.join(first_and_initials)} {lastname}"
+
+
+def strip_accents(s):
+    return "".join(
+        [c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"]
+    )
