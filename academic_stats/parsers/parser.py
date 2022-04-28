@@ -10,22 +10,19 @@ class generic_parser:
         self.path = path_to_dir
         self.files = glob.glob(f"{self.path}/*.xml")
 
-    # def __iter__(self):
-    #     return self
-
     def __iter__(self):
         """
         Processes the next xml file and yields an author object
         """
         for file in self.files:
+            self.curr_file = file
             xml_data = self._get_xml_root(file)
             authors = self._get_authors(xml_data)
             for author in authors:
                 name = name_processor(self._get_name(author))
                 countries = [
-                    affiliations_processor(_) for _ in self._get_affiliations(author)
+                    affiliations_processor(_.text) for _ in self._get_affiliations(author)
                 ]
-                #  country_count = Counter(countries)
                 yield Author(name, set(countries))
 
     def _get_xml_root(self, file: str):
@@ -48,9 +45,16 @@ class PubMed(generic_parser):
         return authors
 
     def _get_name(self, xml_data):
-        forename = xml_data.find("ForeName").text
-        initials = xml_data.find("Initials").text
-        lastname = xml_data.find("LastName").text
+        """
+        If we don't find the tags we return an empty string as the name
+        """
+        forename, initials, lastname = " ", " ", " "
+        try:
+            forename = xml_data.find("ForeName").text
+            initials = xml_data.find("Initials").text
+            lastname = xml_data.find("LastName").text
+        except AttributeError as e:
+            print(f"Author tag without ForeName Initials LastName {e}")
         return f"{forename} {initials} {lastname}"
 
     def _get_affiliations(self, xml_data):
