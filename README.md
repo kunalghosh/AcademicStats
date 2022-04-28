@@ -13,7 +13,7 @@ NamedTuple('Author','name countries')
 ```python
 def affiliations_processor(affiliations: str):
 	"""
-	Given a string with affiliations returns the corresponding countries and count of affiliations in each country.
+	Given a string with affiliations returns dictionary of countries: count of affiliations
 
 	affiliations: str
 		A string of affiliations separated by ;
@@ -26,7 +26,7 @@ def affiliations_processor(affiliations: str):
 ```
 
 Next we define a name processor
-```
+```python
 def name_processor(name: str):
 	"""
 	Given a name as "Forename Initial Initial2 ... Lastname" returns a standardized name. 
