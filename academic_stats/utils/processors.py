@@ -1,4 +1,4 @@
-from utils.countries import get_countries_as_set
+from academic_stats.utils.countries import get_countries_as_set
 import re
 import unicodedata
 

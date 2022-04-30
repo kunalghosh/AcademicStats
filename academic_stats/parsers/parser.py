@@ -1,6 +1,5 @@
-from collections import Counter
-from utils.types import Author
-from utils.processors import affiliations_processor, name_processor
+from academic_stats.utils.types import Author
+from academic_stats.utils.processors import affiliations_processor, name_processor
 from xml.etree import ElementTree
 import glob
 

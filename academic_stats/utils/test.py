@@ -1,5 +1,5 @@
 from parsers.parser import PubMed
-from utils.processors import affiliations_processor
+from academic_stats.utils.processors import affiliations_processor
 
 import os
 

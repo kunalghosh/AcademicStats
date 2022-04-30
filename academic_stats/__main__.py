@@ -1,6 +1,7 @@
 """Console script for academic_stats."""
 import sys
 import click
+from academic_stats.parsers.parser import PubMed
 
 
 @click.command()
@@ -20,14 +21,9 @@ import click
 )
 def main(pubmed, arxiv):
     """Console script for academic_stats."""
-    click.echo(
-        "Replace this message by putting your code into " "academic_stats.cli.main"
-    )
-    click.echo("See click documentation at https://click.palletsprojects.com/")
-    print(f"Pubmed {pubmed} Arxiv {arxiv}")
-    print("This is run from cli")
-    print("This is from within __main__")
-    return 0
+    pubmed = PubMed(pubmed)
+    for author in pubmed:
+        print(author)
 
 
 if __name__ == "__main__":
