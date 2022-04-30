@@ -87,8 +87,14 @@ def name_processor(name: str):
             Processed name which is a string with the following structure.
             "<Firstchar of forname><Firstchar of Initial1><Firstchar of Initial2><...> <Lastname without accents>"
     """
+    # preprocess names
     name = strip_accents(name)
-    name_split = name.strip().split(" ")
+    name = " ".join(name.split())
+    if len(name) == 0:
+        # name string is empty nothing to process
+        return ""
+
+    name_split = name.split(" ")
     lastname = name_split[-1]
     first_and_initials = []
     for words in name_split[:-1]:
