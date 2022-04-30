@@ -23,7 +23,8 @@ def main(pubmed, arxiv):
     """Console script for academic_stats."""
     pubmed = PubMed(pubmed)
     for author in pubmed:
-        print(author)
+        if author.countries != set([]):
+            print(author)
 
 
 if __name__ == "__main__":
