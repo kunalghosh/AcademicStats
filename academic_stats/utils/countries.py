@@ -1,16 +1,18 @@
 from functools import lru_cache
 import pandas as pd
+import pkgutil
+import io
 
 
 @lru_cache(maxsize=1)
-def get_countries_as_set(fpath="./AltCountries.csv"):
+def get_countries_as_set(fpath=pkgutil.get_data(__name__, "/AltCountries.csv").decode()):
     """
     Given a csv file with countries returns a set of strings from each word in the file
     """
     country_set = []
     str_to_country = None
 
-    countries = pd.read_csv(fpath)
+    countries = pd.read_csv(io.StringIO(fpath))
 
     # get a dictionary of 'string' : 'Country Name'
     str_to_country = {}
