@@ -34,6 +34,7 @@ def get_triples(it):
             third = None
         yield first, second, third
 
+
 def affiliations_processor(affiliations: str):
     """
     Given a string with affiliations returns dictionary of countries: count of affiliations
@@ -43,12 +44,34 @@ def affiliations_processor(affiliations: str):
 
     Returns
     -------
-    dict(country: str, count: int)
-            Dictionary where keys are the countries that the author is affiliated to
-            values correspond to the count of affiliations in that country.
+    List of affiliated countries
     """
-    print(f"Affiliations {affiliations}")
-    return affiliations
+    assert (
+        type(affiliations) == str
+    ), f"Affiliation must be a string, but is {type(affiliations)}"
+
+    countries = []
+
+    # affiliations could have multiple affiliations separated by ;
+    affiliations = affiliations.strip().split(";")
+    for affiliation in affiliations:
+        # remove non alphabets
+        country_set, str_to_country = get_countries_as_set()
+        affiliation = re.sub("[^A-Za-z ]", "", affiliation)
+
+        # is any word, two consecutive words, three consecutive words in country set ?
+        words = affiliation.split(" ")
+        for w1, w2, w3 in get_triples(words):
+            if w1 in country_set:
+                countries.append(str_to_country[w1])
+                break
+            elif w2 in country_set:
+                countries.append(str_to_country[w2])
+                break
+            elif w3 in country_set:
+                countries.append(str_to_country[w3])
+                break
+    return countries
 
 
 def name_processor(name: str):
