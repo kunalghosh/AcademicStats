@@ -20,9 +20,9 @@ class generic_parser:
             authors = self._get_authors(xml_data)
             for author in authors:
                 name = name_processor(self._get_name(author))
-                countries = [
-                    affiliations_processor(_.text) for _ in self._get_affiliations(author)
-                ]
+                countries = []
+                for affiliation in self._get_affiliations(author):
+                    countries.extend(affiliations_processor(affiliation.text))
                 yield Author(name, set(countries))
 
     def _get_xml_root(self, file: str):
@@ -35,7 +35,7 @@ class generic_parser:
     def _get_name(self, xml_data):
         raise NotImplementedError
 
-    def _get_affiliation(self, xml_data):
+    def _get_affiliations(self, xml_data):
         raise NotImplementedError
 
 
