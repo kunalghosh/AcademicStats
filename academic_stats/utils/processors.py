@@ -1,3 +1,39 @@
+from utils.countries import get_countries_as_set
+import re
+import unicodedata
+
+
+def get_triples(it):
+    """
+    Accepts an iterators and returns i,i+1, i+2 entries
+
+    Returns
+    --------
+    i,i+1, i+2
+    i+1,i+2, i+3
+    i, ..., None
+    i, None, None
+
+    Examples
+    --------
+    >>> [_ for _ in get_triples("ABC")]
+    [('A', 'B', 'C'), ('B', 'C', None), ('C', None, None)]
+    """
+    first, second, third = None, None, None
+    for idx, element in enumerate(it):
+        first = element
+        try:
+            second = it[idx + 1]
+        except:
+            # couldn't find element two
+            second = None
+        try:
+            third = it[idx + 2]
+        except:
+            # couldn't find third element
+            third = None
+        yield first, second, third
+
 def affiliations_processor(affiliations: str):
     """
     Given a string with affiliations returns dictionary of countries: count of affiliations
