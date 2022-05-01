@@ -58,8 +58,9 @@ class PubMed(generic_parser):
             forename = xml_data.find("ForeName").text
             initials = xml_data.find("Initials").text
             lastname = xml_data.find("LastName").text
-        except AttributeError as e:
-            print(f"Author tag without ForeName Initials LastName {e}")
+        except AttributeError:
+            pass
+            #  print(f"Author tag without ForeName Initials LastName {e}")
         return f"{forename} {initials} {lastname}"
 
     def _get_affiliations(self, xml_data):
