@@ -5,7 +5,7 @@ Given PubMed and Arxiv xml dumps, returns a summary
 
 `pip install git+https://github.com/kunal_ghosh/academic_stats.git#egg=academic_stats`
 
-## Useage
+## Usage
 Down the PubMed and Arxiv datasets. Each should be stored in a separate folder and contain one file per author.
 > $ python -m academic_stats --help
 > Usage: python -m academic_stats [OPTIONS]
