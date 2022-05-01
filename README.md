@@ -1,6 +1,34 @@
 # AcademicStats
 Given PubMed and Arxiv xml dumps, returns a summary
 
+## Install
+
+`pip install git+https://github.com/kunal_ghosh/academic_stats.git#egg=academic_stats`
+
+## Useage
+Down the PubMed and Arxiv datasets. Each should be stored in a separate folder and contain one file per author.
+> $ python -m academic_stats --help
+> Usage: python -m academic_stats [OPTIONS]
+> 
+>   Console script for academic_stats.
+> 
+> Options:
+>   --pubmed PATH  Path to the pubmed directory with xml files.
+>   --arxiv PATH   Path to the arxiv directory with xml files.
+>   --help         Show this message and exit.
+
+You can pass either --pubmed, --arxiv or both
+> $ python -m academic_stats --pubmed ~/Downloads/pubmed_and_arxiv_data/pubmed --arxiv ~/Downloads/pubmed_and_arxiv_data/arxiv
+
+Sample output
+> $ python -m academic_stats --arxiv ~/Downloads/pubmed_and_arxiv_data/arxiv
+> China                       :   681
+> Italy                       :   504
+> Germany                     :   468
+> United States               :   448
+> France                      :   206
+> Spain                       :   193
+> ...
 We define an author type. It contains the name of the author and their affiliations.
 ```python
 NamedTuple('Author','name countries')
