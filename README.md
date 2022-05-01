@@ -3,7 +3,9 @@ Given PubMed and Arxiv xml dumps, returns a summary
 
 ## Install
 
-`pip install git+https://github.com/kunal_ghosh/academic_stats.git#egg=academic_stats`
+```bash
+pip install git+https://github.com/kunal_ghosh/academic_stats.git#egg=academic_stats
+```
 
 ## Usage
 Down the PubMed and Arxiv datasets. Each should be stored in a separate folder and contain one file per author.
@@ -19,8 +21,10 @@ Options:
   --help         Show this message and exit.
 ```
 
-You can pass either --pubmed, --arxiv or both
-> $ python -m academic_stats --pubmed ~/Downloads/pubmed_and_arxiv_data/pubmed --arxiv ~/Downloads/pubmed_and_arxiv_data/arxiv
+You can pass either `--pubmed`, `--arxiv` or both
+```bash
+$ python -m academic_stats --pubmed ~/Downloads/pubmed_and_arxiv_data/pubmed --arxiv ~/Downloads/pubmed_and_arxiv_data/arxiv
+```
 
 Sample output
 ```bash
