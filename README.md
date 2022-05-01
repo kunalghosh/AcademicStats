@@ -1,5 +1,5 @@
 # AcademicStats
-Given PubMed and Arxiv xml dumps, returns a summary
+Given PubMed and Arxiv xml dumps, returns a list of countries sorted by the number of affiliated authors.
 
 ## Install
 
