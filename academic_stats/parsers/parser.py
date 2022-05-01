@@ -15,7 +15,13 @@ class generic_parser:
         """
         for file in self.files:
             self.curr_file = file
-            xml_data = self._get_xml_root(file)
+
+            try:
+                xml_data = self._get_xml_root(file)
+            except ElementTree.ParseError:
+                # Ignore file
+                continue
+
             authors = self._get_authors(xml_data)
             for author in authors:
                 name = name_processor(self._get_name(author))
