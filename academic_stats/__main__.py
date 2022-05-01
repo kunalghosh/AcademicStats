@@ -10,33 +10,35 @@ from academic_stats.parsers.parser import PubMed, Arxiv
     "--pubmed",
     type=click.Path(exists=True),
     default=None,
-    required=True,
+    required=False,
     help="Path to the pubmed directory with xml files.",
 )
 @click.option(
     "--arxiv",
     type=click.Path(exists=True),
     default=None,
-    required=True,
+    required=False,
     help="Path to the arxiv directory with xml files.",
 )
 def main(pubmed, arxiv):
     """Console script for academic_stats."""
     country_authors_dict = defaultdict(lambda: set([]))
 
-    pubmed = PubMed(pubmed)
-    for author in pubmed:
-        if author.countries != set([]):
-            if author.name != "":
-                for country in author.countries:
-                    country_authors_dict[country].add(author.name)
+    if pubmed is not None:
+        pubmed = PubMed(pubmed)
+        for author in pubmed:
+            if author.countries != set([]):
+                if author.name != "":
+                    for country in author.countries:
+                        country_authors_dict[country].add(author.name)
 
-    arxiv = Arxiv(arxiv)
-    for author in arxiv:
-        if author.countries != set([]):
-            if author.name != "":
-                for country in author.countries:
-                    country_authors_dict[country].add(author.name)
+    if arxiv is not None:
+        arxiv = Arxiv(arxiv)
+        for author in arxiv:
+            if author.countries != set([]):
+                if author.name != "":
+                    for country in author.countries:
+                        country_authors_dict[country].add(author.name)
 
     # compute number of authors in each country
     country_nauthor = dict(
