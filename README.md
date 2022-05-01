@@ -4,7 +4,7 @@ Given PubMed and Arxiv xml dumps, returns a summary
 ## Install
 
 ```bash
-pip install git+https://github.com/kunal_ghosh/academic_stats.git#egg=academic_stats
+pip install git+https://github.com/kunalghosh/AcademicStats.git#egg=academic_stats
 ```
 
 ## Usage
