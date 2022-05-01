@@ -69,11 +69,13 @@ class PubMed(generic_parser):
 
 class Arxiv(generic_parser):
     def _get_authors(self, xml_data):
-        authors = xml_data.findall("author")
+        authors = xml_data.findall(".//{http://www.w3.org/2005/Atom}author")
         return authors
 
     def _get_name(self, xml_data):
-        return xml_data.find("name")
+        return xml_data.find("{http://www.w3.org/2005/Atom}name").text
 
-    def _get_affiliation(self, xml_data):
-        return xml_data.findall("affiliation")
+    def _get_affiliations(self, xml_data):
+        return xml_data.findall(
+            ".//arxiv:affiliation", {"arxiv": "http://arxiv.org/schemas/atom"}
+        )
