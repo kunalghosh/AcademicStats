@@ -5,14 +5,25 @@ import click
 from academic_stats.parsers.parser import PubMed, Arxiv, generic_parser
 
 
-def process_xmls(xmlobjs: generic_parser):
-    country_authors_dict = defaultdict(lambda: set([]))
-    for author in xmlobjs:
-        if author.countries != set([]):
-            if author.name != "":
-                for country in author.countries:
-                    country_authors_dict[country].add(author.name)
-    return country_authors_dict
+def process_xmls(xmlobjs: generic_parser, ca_dict=None):
+    """
+    Processes a bunch of Author Objects
+
+    Returns
+    -------
+    ca_dict: dict
+        Dictionary with country:str as key and set(author_names:str)
+    """
+    if ca_dict is None:
+        ca_dict = defaultdict(lambda: set([]))
+    else:
+        # update the passed country_authors_dict
+        for author in xmlobjs:
+            if author.countries != set([]):
+                if author.name != "":
+                    for country in author.countries:
+                        ca_dict[country].add(author.name)
+    return ca_dict
 
 
 @click.command()
@@ -36,11 +47,11 @@ def main(pubmed, arxiv):
 
     if pubmed is not None:
         pubmed = PubMed(pubmed)
-        country_authors_dict.update(process_xmls(pubmed))
+        country_authors_dict = process_xmls(pubmed, ca_dict=country_authors_dict)
 
     if arxiv is not None:
         arxiv = Arxiv(arxiv)
-        country_authors_dict.update(process_xmls(arxiv))
+        country_authors_dict = process_xmls(arxiv, ca_dict=country_authors_dict)
 
     # compute number of authors in each country
     country_nauthor = dict(
