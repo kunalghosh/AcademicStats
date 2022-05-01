@@ -53,8 +53,8 @@ def affiliations_processor(affiliations: str):
     countries = []
 
     # affiliations could have multiple affiliations separated by ;
-    affiliations = affiliations.strip().split(";")
-    for affiliation in affiliations:
+    affiliations_list = affiliations.strip().split(";")
+    for affiliation in affiliations_list:
         # remove non alphabets
         country_set, str_to_country = get_countries_as_set()
         affiliation = re.sub("[^A-Za-z ]", "", affiliation)
