@@ -2,7 +2,7 @@
 from collections import defaultdict
 import sys
 import click
-from academic_stats.parsers.parser import PubMed, Arxiv, generic_parser
+from academic_stats.parsers.parser import PubMedParser, ArxivParser, generic_parser
 
 
 def process_xmls(xmlobjs: generic_parser, ca_dict=None):
@@ -46,11 +46,11 @@ def main(pubmed, arxiv):
     country_authors_dict = defaultdict(lambda: set([]))
 
     if pubmed is not None:
-        pubmed = PubMed(pubmed)
+        pubmed = PubMedParser(pubmed)
         country_authors_dict = process_xmls(pubmed, ca_dict=country_authors_dict)
 
     if arxiv is not None:
-        arxiv = Arxiv(arxiv)
+        arxiv = ArxivParser(arxiv)
         country_authors_dict = process_xmls(arxiv, ca_dict=country_authors_dict)
 
     # compute number of authors in each country

@@ -44,7 +44,7 @@ class generic_parser:
         raise NotImplementedError
 
 
-class PubMed(generic_parser):
+class PubMedParser(generic_parser):
     def _get_authors(self, xml_data):
         authors = xml_data.findall(".//Author")
         return authors
@@ -67,7 +67,7 @@ class PubMed(generic_parser):
         return xml_data.findall(".//Affiliation")
 
 
-class Arxiv(generic_parser):
+class ArxivParserParser(generic_parser):
     def _get_authors(self, xml_data):
         authors = xml_data.findall(".//{http://www.w3.org/2005/Atom}author")
         return authors
