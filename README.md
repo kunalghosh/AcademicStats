@@ -7,6 +7,9 @@ Given PubMed and Arxiv xml dumps, returns a list of countries sorted by the numb
 pip install git+https://github.com/kunalghosh/AcademicStats.git#egg=academic_stats
 ```
 
+## Data
+The Arxiv and PubMed data is stored in google drive. The link to the data can be found in the assignment homepage on [hackmd.io](hackmd.io/@wmvanvliet/S1QiaABZ9)
+
 ## Usage
 Down the PubMed and Arxiv datasets. Each should be stored in a separate folder and contain one file per author.
 ```bash
