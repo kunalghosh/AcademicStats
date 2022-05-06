@@ -8,7 +8,7 @@ pip install git+https://github.com/kunalghosh/AcademicStats.git#egg=academic_sta
 ```
 
 ## Data
-The Arxiv and PubMed data is stored in google drive. The link to the data can be found in the assignment homepage on [hackmd.io](hackmd.io/@wmvanvliet/S1QiaABZ9)
+The Arxiv and PubMed data is stored in google drive. The link to the data can be found in the assignment homepage on [hackmd.io](https://hackmd.io/@wmvanvliet/S1QiaABZ9)
 
 ## Usage
 Down the PubMed and Arxiv datasets. Each should be stored in a separate folder and contain one file per author.
