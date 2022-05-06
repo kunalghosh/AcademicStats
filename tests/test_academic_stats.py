@@ -6,9 +6,8 @@ import pytest
 
 from click.testing import CliRunner
 
-from academic_stats import academic_stats
-from academic_stats import cli
-
+import academic_stats
+from academic_stats.utils.xml_processor import process_xmls
 
 @pytest.fixture
 def response():
@@ -19,6 +18,9 @@ def response():
     # import requests
     # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
 
+
+def test_process_xml():
+    process_xmls()
 
 def test_content(response):
     """Sample pytest test function with the pytest fixture as an argument."""
