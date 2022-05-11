@@ -1,4 +1,4 @@
-from academic_stats.utils.types import Author
+from academic_stats.utils.types import Author, Publication
 from academic_stats.utils.processors import affiliations_processor, name_processor
 from xml.etree import ElementTree
 import glob
@@ -22,13 +22,18 @@ class generic_parser:
                 # Ignore file
                 continue
 
-            authors = self._get_authors(xml_data)
-            for author in authors:
-                name = name_processor(self._get_name(author))
-                countries = []
-                for affiliation in self._get_affiliations(author):
-                    countries.extend(affiliations_processor(affiliation.text))
-                yield Author(name, set(countries))
+            publications = self._get_publication(xml_data)
+            for publication in publications:
+                publication_title = self._get_publication_title(publication)
+                authors_list = []
+                authors = self._get_authors(publication)
+                for author in authors:
+                    name = name_processor(self._get_name(author))
+                    countries = []
+                    for affiliation in self._get_affiliations(author):
+                        countries.extend(affiliations_processor(affiliation.text))
+                    authors_list.append(Author(name, set(countries)))
+                yield Publication(publication_title, authors_list)
 
     def _get_xml_root(self, file: str):
         tree = ElementTree.parse(file)
