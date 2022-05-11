@@ -65,6 +65,7 @@ class PubMedParser(generic_parser):
         """
         publication = xml_data.findall(".//PubMedArticle")
         return publication
+
     def _get_authors(self, xml_data):
         authors = xml_data.findall(".//Author")
         return authors
@@ -87,7 +88,15 @@ class PubMedParser(generic_parser):
         return xml_data.findall(".//Affiliation")
 
 
-class ArxivParserParser(generic_parser):
+class ArxivParser(generic_parser):
+    def _get_publication_title(self, xml_data):
+        title = xml_data.findall(".//title")
+        return title
+
+    def _get_publication(self, xml_data):
+        publication = xml_data.findall(".//entry")
+        return publication
+
     def _get_authors(self, xml_data):
         authors = xml_data.findall(".//{http://www.w3.org/2005/Atom}author")
         return authors
