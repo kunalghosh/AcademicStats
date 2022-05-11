@@ -43,6 +43,15 @@ class generic_parser:
     def _get_affiliations(self, xml_data):
         raise NotImplementedError
 
+    def _get_publication(self, xml_data):
+        raise NotImplementedError
+
+    def _get_publication_title(self, xml_data):
+        """
+        get the title of the publication given a tag representing a publication
+        """
+        raise NotImplementedError
+
 
 class PubMedParser(generic_parser):
     def _get_authors(self, xml_data):
