@@ -7,3 +7,11 @@ Author = namedtuple("Author", "name countries")
 	countries: set
 		Set of countries that the author is affiliated in.
 """
+
+Publication = namedtuple("Publication", "title authorlist")
+"""
+    title: str
+        Title of the Publication
+    author_list: set of Author(s)
+        Set of Authors who have co-authored the paper
+"""
