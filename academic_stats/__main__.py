@@ -1,8 +1,9 @@
 """Console script for academic_stats."""
 from collections import defaultdict
+from academic_stats.parsers.parser import PubMedParser, ArxivParser, generic_parser
+
 import sys
 import click
-from academic_stats.parsers.parser import PubMedParser, ArxivParser, generic_parser
 
 
 def process_xmls(xmlobjs: generic_parser, ca_dict=None):
@@ -16,9 +17,10 @@ def process_xmls(xmlobjs: generic_parser, ca_dict=None):
     """
     if ca_dict is None:
         ca_dict = defaultdict(lambda: set([]))
-    else:
-        # update the passed country_authors_dict
-        for author in xmlobjs:
+
+    # update the passed country_authors_dict
+    for publication in xmlobjs:
+        for author in publication.authorlist:
             if author.countries != set([]):
                 if author.name != "":
                     for country in author.countries:
