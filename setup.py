@@ -31,7 +31,7 @@ setup(
     description="Given PubMed and Arxiv xml dumps, returns a summary",
     entry_points={
         "console_scripts": [
-            "academic_stats=academic_stats.cli:main",
+            "academic_stats=academic_stats:main",
         ],
     },
     install_requires=requirements,
