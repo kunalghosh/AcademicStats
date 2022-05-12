@@ -60,15 +60,15 @@ class generic_parser:
 
 class PubMedParser(generic_parser):
     def _get_publication_title(self, xml_data):
-        title = xml_data.findall(".//ArticleTitle")
-        return title
+        title = xml_data.find(".//ArticleTitle")
+        return title.text
 
     def _get_publication(self, xml_data):
         """
         Returns an XML entry which should have authors and affiliations
         as sub-tags
         """
-        publication = xml_data.findall(".//PubMedArticle")
+        publication = xml_data.findall(".//PubmedArticle")
         return publication
 
     def _get_authors(self, xml_data):
