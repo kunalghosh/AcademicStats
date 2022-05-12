@@ -95,11 +95,11 @@ class PubMedParser(generic_parser):
 
 class ArxivParser(generic_parser):
     def _get_publication_title(self, xml_data):
-        title = xml_data.findall(".//title")
-        return title
+        title = xml_data.find(".//{http://www.w3.org/2005/Atom}title")
+        return title.text
 
     def _get_publication(self, xml_data):
-        publication = xml_data.findall(".//entry")
+        publication = xml_data.findall(".//{http://www.w3.org/2005/Atom}entry")
         return publication
 
     def _get_authors(self, xml_data):
